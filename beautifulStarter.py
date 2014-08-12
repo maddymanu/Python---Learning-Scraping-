@@ -36,5 +36,7 @@ links = soup.find_all("a")
 g_data = soup.find_all("div" , {"class" : "post"})
 # print g_data
 
+# use item.contents to print .... item is a aLIST so use contents[1] etc
 for item in g_data:
-  print item.text
+  for item2 in item.contents[1].find_all("img"):
+    print item2.get("src")
