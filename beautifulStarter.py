@@ -27,11 +27,6 @@ r = requests.get(url)
 soup = BeautifulSoup(r.content)
 links = soup.find_all("a")
 
-# Use something like this to download all the images from SomeCard
-# for link in links:
-#   if "http" in link.get("href"):
-#     # print link
-
 
 # for yellowpages, the div tag is post
 # V IMPORTANT - DIV Search can have anything you want
@@ -43,17 +38,3 @@ g_data = soup.find_all("div" , {"class" : "post"})
 
 for item in g_data:
   print item.text
-
-# def savePic(url):
-#     hs = hashlib.sha224(url).hexdigest()
-#     file_extension = url.split(".")[-1]
-#     uri = ""
-#     dest = uri+hs+"."+file_extension
-#     print dest
-#     try:
-#         urllib.urlretrieve(url,dest)
-#     except:
-#         print "save failed"
-#
-#
-# savePic(image)
