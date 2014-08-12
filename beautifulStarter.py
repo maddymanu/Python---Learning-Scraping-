@@ -15,11 +15,18 @@ from bs4 import BeautifulSoup
 
 url = "http://www.yellowpages.com/news/entertainment"
 url_somecard = "http://www.someecards.com/ecards/flirting/"
-r = requests.get(url)
+r = requests.get(url_somecard)
 
 soup = BeautifulSoup(r.content)
 links = soup.find_all("a")
 
-for link in links:
-  if "http" in link:
-    print link
+# Use something like this to download all the images from SomeCard
+# for link in links:
+#   if "http" in link.get("href"):
+#     # print link
+
+
+# for yellowpages, the div tag is post
+# V IMPORTANT - DIV Search can have anything you want
+g_data = soup.find_all("div" , {"class" : "img-wrapper"})
+print g_data
