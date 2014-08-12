@@ -24,6 +24,11 @@
 #     # print link
 
 
+# Getting src info from deep
+for item in g_data:
+  for item2 in item.contents[1].find_all("img"):
+    print item2.get("src")
+
 
 #
 #

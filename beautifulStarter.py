@@ -25,7 +25,7 @@ image = "http://i1.ypcdn.com/ypcms/system/assets/134450/medium/Million-Dollar-Li
 r = requests.get(url)
 
 soup = BeautifulSoup(r.content)
-links = soup.find_all("a")
+# links = soup.find_all("a")
 
 
 # for yellowpages, the div tag is post
@@ -38,5 +38,4 @@ g_data = soup.find_all("div" , {"class" : "post"})
 
 # use item.contents to print .... item is a aLIST so use contents[1] etc
 for item in g_data:
-  for item2 in item.contents[1].find_all("img"):
-    print item2.get("src")
+  print item.contents[1].find_all("img")
