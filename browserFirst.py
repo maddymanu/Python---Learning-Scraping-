@@ -81,14 +81,15 @@ driver.quit()
 
 
 soup = BeautifulSoup(html_source,'html.parser')
+soup.prettify()
 tables = soup.find_all("div" , {"id" : "ucsdCourses"})
 #
 # # print table
 #
 for item in tables:
   table = item.find_all("table")
-  print table[0].select("tbody")[0].select("tr") # this is printing 2 nested tables
-  # for smaller_tbody in table[0].select("tbody")
+  for row in table[0].select("tbody")[0].select("tr")[1:]: #[0] # this is printing 2 nested tables
+    print row
 
 
 
