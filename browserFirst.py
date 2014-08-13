@@ -65,7 +65,9 @@ print bcolors.ENDC
 chromedriver = "/Users/adityabansal/Downloads/chromedriver"
 os.environ["webdriver.chrome.driver"] = chromedriver
 # webdriver.Chrome(chromedriver)
-driver = webdriver.Chrome(service_args=["--verbose"])
+options = webdriver.ChromeOptions()
+options.add_experimental_option("excludeSwitches", ["ignore-certificate-errors"])
+driver = webdriver.Chrome(service_args=["--verbose"] , chrome_options=options)
 
 driver.get("https://mytritonlink.ucsd.edu")
 
@@ -88,8 +90,8 @@ tables = soup.find_all("div" , {"id" : "ucsdCourses"})
 #
 for item in tables:
   table = item.find_all("table")
-  for row in table[0].select("tbody")[0].select("tr")[1:]: #[0] # this is printing 2 nested tables
-    print row
+  for row in table[0].select("tbody")[0].select("tr")[1:-4]: #[0] # this is printing 2 nested tables
+    print row.select("td")
 
 
 
