@@ -65,10 +65,13 @@ elem = driver.find_element_by_name("urn:mace:ucsd.edu:sso:password")
 elem.send_keys(pwd)
 elem.send_keys(Keys.RETURN)
 
+driver.get("https://act.ucsd.edu/studentAcademicHistory/academichistorystudentdisplay.htm")
+html_source = driver.page_source
+driver.quit()
 
 
-
-
+soup = BeautifulSoup(html_source,'html.parser')
+print soup
 
 
 
