@@ -65,9 +65,7 @@ print bcolors.ENDC
 chromedriver = "/Users/adityabansal/Downloads/chromedriver"
 os.environ["webdriver.chrome.driver"] = chromedriver
 # webdriver.Chrome(chromedriver)
-options = webdriver.ChromeOptions()
-options.add_experimental_option("excludeSwitches", ["ignore-certificate-errors"])
-driver = webdriver.Chrome(service_args=["--verbose"] , chrome_options=options)
+driver = webdriver.Chrome(service_args=["--verbose"])
 
 driver.get("https://mytritonlink.ucsd.edu")
 
