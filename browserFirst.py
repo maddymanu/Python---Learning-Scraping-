@@ -87,8 +87,8 @@ tables = soup.find_all("div" , {"id" : "ucsdCourses"})
 #
 for item in tables:
   table = item.find_all("table")
-  print table[0].select("tbody") # this is printing 2 nested tables
-
+  print table[0].select("tbody")[0].select("tr") # this is printing 2 nested tables
+  # for smaller_tbody in table[0].select("tbody")
 
 
 
