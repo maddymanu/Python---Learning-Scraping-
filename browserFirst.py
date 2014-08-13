@@ -6,8 +6,16 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import os
+import getpass
 
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
 # br = mechanize.Browser()
 #
 # cj = cookielib.LWPCookieJar()
@@ -45,11 +53,13 @@ import os
 
 # print(br.open('https://mytritonlink.ucsd.edu').read())
 
+print bcolors.WARNING
 print "Enter Your Username please"
-usr = raw_input(">>>>>")
+usr = raw_input(">>>>> ")
 
 print "Enter Your Password please"
-pwd = raw_input(">>>>>")
+pwd = getpass.getpass(">>>>> ")
+print bcolors.ENDC
 
 
 chromedriver = "/Users/adityabansal/Downloads/chromedriver"
@@ -65,14 +75,15 @@ elem = driver.find_element_by_name("urn:mace:ucsd.edu:sso:password")
 elem.send_keys(pwd)
 elem.send_keys(Keys.RETURN)
 
-driver.get("https://act.ucsd.edu/scheduleOfClasses/scheduleOfClassesStudent.htm")
+driver.get("https://act.ucsd.edu/studentWaitlist/waitlist")
 html_source = driver.page_source
 driver.quit()
 
 
 soup = BeautifulSoup(html_source,'html.parser')
-print soup.find_all("a")
+table = soup.find_all("table")
 
+print table
 
 
 
