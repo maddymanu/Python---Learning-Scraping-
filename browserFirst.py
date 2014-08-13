@@ -53,7 +53,7 @@ class bcolors:
 
 # print(br.open('https://mytritonlink.ucsd.edu').read())
 
-print bcolors.WARNING
+print bcolors.OKBLUE
 print "Enter Your Username please"
 usr = raw_input(">>>>> ")
 
@@ -75,17 +75,19 @@ elem = driver.find_element_by_name("urn:mace:ucsd.edu:sso:password")
 elem.send_keys(pwd)
 elem.send_keys(Keys.RETURN)
 
-driver.get("https://act.ucsd.edu/studentWaitlist/waitlist")
+driver.get("https://act.ucsd.edu/studentAcademicHistory/academichistorystudentdisplay.htm")
 html_source = driver.page_source
 driver.quit()
 
 
 soup = BeautifulSoup(html_source,'html.parser')
-table = soup.find_all("table")
-
-print table
-
-
+tables = soup.find_all("div" , {"id" : "ucsdCourses"})
+#
+# # print table
+#
+for item in tables:
+  table = item.find_all("table")
+  print table[0].select("tbody") # this is printing 2 nested tables
 
 
 
