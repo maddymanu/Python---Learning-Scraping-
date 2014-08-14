@@ -6,6 +6,10 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import getpass
 import os
+import cookielib
+import httplib
+import socket
+
 
 class bcolors:
     HEADER = '\033[95m'
@@ -25,7 +29,12 @@ print bcolors.ENDC
 
 chromedriver = "/Users/adityabansal/Downloads/chromedriver"
 os.environ["webdriver.chrome.driver"] = chromedriver
-driver = webdriver.Chrome(service_args=["--verbose"])
+# driver = webdriver.Chrome(service_args=["--verbose"])
+driver = webdriver.Firefox()
+# driver.set_page_load_timeout(45)
+driver.set_script_timeout(30)
+timeout = 30
+socket.setdefaulttimeout(timeout)
 
 driver.get("https://mytritonlink.ucsd.edu")
 
@@ -35,7 +44,9 @@ elem = driver.find_element_by_name("urn:mace:ucsd.edu:sso:password")
 elem.send_keys(pwd)
 elem.send_keys(Keys.RETURN)
 
-driver.get("https://act.ucsd.edu/scheduleOfClasses/scheduleOfClassesStudent.htm#tabs-crs")
+driver.get("https://act.ucsd.edu/scheduleOfClasses/scheduleOfClassesStudentResult.htm#tabs-crs")
+parent_h = driver.current_window_handle
+
 
 # element = driver.find_element_by_id("courses")
 
@@ -52,18 +63,39 @@ def getElem(id):
 currElem = getElem("courses")
 course = "CSE 100"
 currElem.send_keys(course)
+
+
+
+
+try:
+  print currElem.submit()
+  print "here"
+except:
+  print "try1"
+
+while True:
+  try :
+    driver.get("https://act.ucsd.edu/scheduleOfClasses/scheduleOfClassesStudentResult.htm#tabs-sub")
+    break
+  except httplib.CannotSendRequest:
+    print "Cant Get Google"
+  except socket.timeout:
+    print "Socket Error"
+
+code_btn = driver.find_elements_by_xpath("//*[contains(text(), 'by code')]")
+code_btn[0].click()
+
+currElem = getElem("courses")
 currElem.submit()
 
-# btn = getElem("socFacSubmit")
-# btn.send_keys("\n")
-# btn.click()
-# btn.click()
 
 
-# html_source = driver.page_source
-# driver.quit()
 
-# soup = BeautifulSoup(html_source,'html.parser')
-# soup.prettify()
-# tables = soup.find_all("table" , recursive=False)
-# print tables
+
+
+
+
+
+
+
+# Done
