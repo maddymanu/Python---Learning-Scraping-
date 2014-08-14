@@ -89,7 +89,12 @@ tables = soup.find_all("div" , {"id" : "ucsdCourses"})
 for item in tables:
   table = item.find_all("table")
   for row in table[0].select("tbody")[0].select("tr")[1:-4]: #[0] # this is printing 2 nested tables
-    print row.select("td")
+    course_cat = row.select("td")[0].text
+    course_no = row.select("td")[1].text
+    grade = row.select("td")[4].text
+    if grade:
+      print grade, " for " , course_cat, course_no
+
 
 
 
