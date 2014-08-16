@@ -64,9 +64,18 @@ for item in list_of_links:
 
 
   for img_link in soup.find_all("img"):
+    # link for the particular comic.
     src_link = img_link.get('src')
-    print src_link
-
+    curr_comic = src_link.split("/")
+    if curr_comic[4] == "comics":
+      img_page = urllib.urlopen(src_link)
+      img_data = img_page.read()
+      filename = curr_comic[6]
+      filename = filename.replace('?reload' , '')
+      path = os.path.join(comicdir , filename)
+      with open (path,"wb") as data:
+        data.write(img_data)
+  print "Downloaded comic " + comicname
 
 
 
