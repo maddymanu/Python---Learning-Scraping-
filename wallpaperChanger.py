@@ -5,7 +5,8 @@ def __main__():
   parser = argparse.ArgumentParser(description='Set desktop wallpaper.')
   parser.add_argument('file', type=file, help='File to use as wallpaper.')
   args = parser.parse_args()
-  f = open("RajMusicals.png")
+  f = args.file
+  print f.name
   se = app('System Events')
   desktops = se.desktops.display_name.get()
   for d in desktops:
